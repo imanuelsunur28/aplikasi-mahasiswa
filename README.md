@@ -5,7 +5,6 @@ Aplikasi web untuk manajemen data mahasiswa dengan desain modern dan responsif.
 ## Fitur
 
 - ✅ CRUD (Create, Read, Update, Delete) Mahasiswa
-- 📊 Query laporan mahasiswa
 - 🎨 UI Modern dengan animasi smooth
 - 📱 Responsive design untuk semua device
 - 🗄️ Database MySQL integration
@@ -63,7 +62,6 @@ php -S localhost:8000
 2. **Tambah** - Tambah data mahasiswa baru
 3. **Edit** - Ubah data mahasiswa yang sudah ada
 4. **Hapus** - Hapus data mahasiswa
-5. **Query Soal** - Laporan query database
 
 ## Fitur Desain
 

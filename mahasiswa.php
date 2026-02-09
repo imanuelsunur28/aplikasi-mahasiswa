@@ -2,7 +2,6 @@
 /*************************************************
  * APLIKASI MAHASISWA - SINGLE FILE (PHP + MySQLi)
  * - CRUD mahasiswa
- * - Query soal (d-k)
  *************************************************/
 
 // ====== KONFIG KONEKSI (Soal 4.1) ======
@@ -99,33 +98,27 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a3f 50%, #16213e 100%);
       min-height: 100vh;
       padding: 20px;
-      animation: gradientShift 15s ease infinite;
-      background-size: 200% 200%;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      color: #333;
     }
 
     .box {
       max-width: 1100px;
       margin: 0 auto;
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 0 40px rgba(102, 126, 234, 0.15);
+      background: #fafaf8;
+      border-radius: 24px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.05);
       overflow: hidden;
-      animation: slideUp 0.6s ease-out;
+      animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     @keyframes slideUp {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
       }
       to {
         opacity: 1;
@@ -134,47 +127,49 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
     }
 
     h2 {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 35px 25px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #f5deb3;
+      padding: 45px 35px;
       margin: 0;
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
     h3 {
-      color: #2c3e50;
-      margin: 25px 0 15px 0;
-      font-size: 22px;
+      color: #1a1a2e;
+      margin: 28px 0 16px 0;
+      font-size: 24px;
       font-weight: 700;
-      padding: 0 25px;
+      padding: 0 35px;
     }
 
     nav {
-      background: linear-gradient(to right, #f8f9fa 0%, #f0f1f7 100%);
-      padding: 20px 25px;
-      border-bottom: 1px solid #e0e0f0;
+      background: #f5f5f0;
+      padding: 28px 35px;
+      border-bottom: 2px solid #e8e8e0;
       display: flex;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
       align-items: center;
     }
 
     nav a {
       display: inline-block;
-      padding: 11px 22px;
+      padding: 13px 28px;
       background: white;
-      color: #667eea;
+      color: #1a1a2e;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 700;
-      border: 2px solid #667eea;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 2px solid #d4af37;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
       cursor: pointer;
       position: relative;
       overflow: hidden;
+      font-size: 14px;
+      letter-spacing: 0.5px;
     }
 
     nav a::before {
@@ -184,15 +179,15 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
       left: -100%;
       width: 100%;
       height: 100%;
-      background: #667eea;
+      background: #d4af37;
       z-index: -1;
-      transition: left 0.4s ease;
+      transition: left 0.35s ease;
     }
 
     nav a:hover {
       color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(212, 175, 55, 0.3);
     }
 
     nav a:hover::before {
@@ -201,26 +196,27 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
 
     hr {
       border: none;
-      height: 2px;
-      background: linear-gradient(to right, transparent, #667eea, transparent);
+      height: 1px;
+      background: linear-gradient(to right, transparent, #d4af37, transparent);
       margin: 0;
     }
 
     .msg, .err {
-      margin: 20px 25px;
-      padding: 18px 22px;
-      border-radius: 12px;
+      margin: 24px 35px;
+      padding: 18px 24px;
+      border-radius: 14px;
       font-weight: 600;
-      animation: slideDown 0.5s ease-out;
+      animation: slideDown 0.6s ease-out;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+      border-left: 5px solid;
     }
 
     @keyframes slideDown {
       from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-25px);
       }
       to {
         opacity: 1;
@@ -229,50 +225,50 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
     }
 
     .msg {
-      background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-      border: 2px solid #28a745;
-      color: #155724;
+      background: #f0fdf4;
+      border-left-color: #22c55e;
+      color: #166534;
     }
 
     .msg::before {
       content: '✓';
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
     }
 
     .err {
-      background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-      border: 2px solid #dc3545;
-      color: #721c24;
+      background: #fef2f2;
+      border-left-color: #ef4444;
+      color: #7f1d1d;
     }
 
     .err::before {
       content: '✕';
-      font-size: 20px;
+      font-size: 22px;
       font-weight: bold;
     }
 
     table {
       border-collapse: collapse;
       width: 100%;
-      margin: 20px 0;
+      margin: 24px 0;
     }
 
     th {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 18px 15px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #f5deb3;
+      padding: 18px 20px;
       text-align: left;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
     }
 
     td {
-      padding: 14px 15px;
+      padding: 16px 20px;
       border-bottom: 1px solid #f0f0f0;
-      color: #333;
+      color: #444;
       font-size: 14px;
     }
 
@@ -281,8 +277,8 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
     }
 
     tr:hover {
-      background-color: #f8f9ff;
-      box-shadow: inset 0 0 10px rgba(102, 126, 234, 0.1);
+      background-color: #fffbf5;
+      box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.08);
     }
 
     tr:last-child td {
@@ -290,18 +286,18 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
     }
 
     form {
-      padding: 30px;
-      background: linear-gradient(135deg, #fafbff 0%, #f5f7ff 100%);
-      border-radius: 15px;
-      margin: 20px 25px;
-      border: 1px solid #e0e5ff;
+      padding: 36px;
+      background: #fffbf5;
+      border-radius: 16px;
+      margin: 24px 35px;
+      border: 1px solid #f0e6d2;
     }
 
     .row {
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       display: flex;
       flex-direction: column;
-      animation: fadeIn 0.5s ease-out forwards;
+      animation: fadeIn 0.6s ease-out forwards;
       opacity: 0;
     }
 
@@ -319,33 +315,35 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
 
     .row label {
       font-weight: 700;
-      color: #2c3e50;
+      color: #1a1a2e;
       margin-bottom: 10px;
       font-size: 15px;
       text-transform: capitalize;
+      letter-spacing: 0.3px;
     }
 
     input, select {
-      padding: 13px 16px;
-      border: 2px solid #e0e5ff;
+      padding: 14px 18px;
+      border: 2px solid #e8e8e0;
       border-radius: 10px;
       font-size: 14px;
       transition: all 0.3s ease;
       font-family: inherit;
       background: white;
+      color: #333;
     }
 
     input:focus, select:focus {
       outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
-      transform: translateY(-1px);
+      border-color: #d4af37;
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+      transform: translateY(-2px);
     }
 
     button {
-      padding: 14px 35px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
+      padding: 14px 36px;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #f5deb3;
       border: none;
       border-radius: 10px;
       font-weight: 700;
@@ -354,8 +352,8 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
       transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       margin-right: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      letter-spacing: 1px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       position: relative;
       overflow: hidden;
     }
@@ -368,14 +366,20 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
       width: 0;
       height: 0;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
+      background: #d4af37;
       transform: translate(-50%, -50%);
       transition: width 0.6s, height 0.6s;
+      z-index: 0;
+    }
+
+    button {
+      position: relative;
+      z-index: 1;
     }
 
     button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
     }
 
     button:hover::before {
@@ -384,29 +388,30 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
     }
 
     button:active {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
     form a {
       display: inline-block;
-      padding: 14px 35px;
-      background: #e8eef7;
-      color: #667eea;
+      padding: 14px 36px;
+      background: #f5f5f0;
+      color: #1a1a2e;
       text-decoration: none;
       border-radius: 10px;
       font-weight: 700;
       transition: all 0.3s ease;
       cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border: 2px solid transparent;
+      letter-spacing: 1px;
+      border: 2px solid #e8e8e0;
     }
 
     form a:hover {
-      background: #667eea;
+      background: #d4af37;
       color: white;
+      border-color: #d4af37;
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
     }
 
     .actions {
@@ -417,76 +422,77 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
 
     .actions a {
       display: inline-block;
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: 8px;
       font-size: 12px;
       font-weight: 700;
       text-decoration: none;
       transition: all 0.3s ease;
       text-transform: uppercase;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
     }
 
     .actions a:first-child {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #f5deb3;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .actions a:first-child:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
 
     .actions a:last-child {
-      background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+      background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
       color: white;
-      box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+      box-shadow: 0 4px 12px rgba(229, 62, 62, 0.3);
     }
 
     .actions a:last-child:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
+      box-shadow: 0 8px 20px rgba(229, 62, 62, 0.4);
     }
 
     code, pre {
-      background: #2d2d2d;
-      color: #f8f8f2;
-      padding: 16px 18px;
+      background: #1a1a2e;
+      color: #f5deb3;
+      padding: 18px 20px;
       display: block;
       border-radius: 10px;
       overflow: auto;
-      margin: 15px 25px;
-      font-family: 'Courier New', monospace;
+      margin: 18px 35px;
+      font-family: 'Monaco', 'Courier New', monospace;
       font-size: 13px;
-      line-height: 1.6;
-      border: 1px solid #404040;
+      line-height: 1.7;
+      border: 1px solid #2a2a4e;
     }
 
     p {
-      color: #555;
+      color: #666;
       line-height: 1.8;
-      padding: 0 25px;
+      padding: 0 35px;
       font-size: 15px;
     }
 
     b {
-      color: #2c3e50;
+      color: #1a1a2e;
       font-weight: 700;
     }
 
     @media (max-width: 768px) {
       .box {
-        border-radius: 15px;
+        border-radius: 16px;
       }
 
       h2 {
-        font-size: 24px;
-        padding: 25px;
+        font-size: 28px;
+        padding: 30px 25px;
       }
 
       nav {
         flex-direction: column;
+        padding: 20px;
       }
 
       nav a {
@@ -499,7 +505,7 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
       }
 
       th, td {
-        padding: 10px;
+        padding: 12px;
       }
 
       .actions {
@@ -512,12 +518,22 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
       }
 
       form {
-        padding: 20px;
+        padding: 24px;
+        margin: 20px;
       }
 
       button, form a {
         width: 100%;
         margin-right: 0;
+        margin-bottom: 10px;
+      }
+
+      h3 {
+        padding: 0 20px;
+      }
+
+      p {
+        padding: 0 20px;
       }
     }
   </style>
@@ -528,7 +544,6 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
     <nav>
       <a href="?aksi=list">Data Mahasiswa</a>
       <a href="?aksi=form_tambah">Tambah</a>
-      <a href="?aksi=query">Query Soal</a>
     </nav>
     <hr>
 
@@ -633,80 +648,6 @@ if (isset($_GET['msg']) && $msg === "") $msg = $_GET['msg'];
         </form>
         <?php
       }
-    }
-
-    // ====== VIEW: QUERY SOAL (d-k) ======
-    elseif ($aksi === 'query') {
-
-      // fungsi tampil tabel dari query
-      $show = function($judul, $sql) use ($conn) {
-        echo "<h3>".e($judul)."</h3>";
-        echo "<pre>".e($sql)."</pre>";
-        $res = $conn->query($sql);
-        if (!$res) {
-          echo "<div class='err'>Query error: ".e($conn->error)."</div>";
-          return;
-        }
-        if ($res->num_rows === 0) {
-          echo "<p>(Tidak ada data)</p>";
-          return;
-        }
-        echo "<table><tr>";
-        foreach ($res->fetch_fields() as $f) echo "<th>".e($f->name)."</th>";
-        echo "</tr>";
-        while ($row = $res->fetch_assoc()) {
-          echo "<tr>";
-          foreach ($row as $v) echo "<td>".e($v)."</td>";
-          echo "</tr>";
-        }
-        echo "</table>";
-      };
-
-      echo "<h3>Query Soal</h3>";
-      echo "<p>Berikut hasil query sesuai poin d–k pada soal.</p>";
-
-      // (d) pilih mahasiswa sex='P'
-      $show("d) Mahasiswa dengan sex = 'P'",
-        "SELECT * FROM mahasiswa WHERE sex='P'");
-
-      // (e) ubah jurusan Siti menjadi Sastra (ditampilkan sebagai perintah)
-      echo "<h3>e) SQL ubah Prodi Siti menjadi Sastra</h3>";
-      echo "<pre>UPDATE mahasiswa SET prodi='Sastra' WHERE nama='Siti';</pre>";
-
-      // (f) prodi unik
-      $show("f) Daftar Prodi (unik / tampil sekali)",
-        "SELECT DISTINCT prodi FROM mahasiswa ORDER BY prodi ASC");
-
-      // (g) mahasiswa yang sudah kuliah >= 5 tahun
-      $show("g) Mahasiswa yang sudah kuliah >= 5 tahun",
-        "SELECT nim, nama, prodi, tanggal_masuk
-         FROM mahasiswa
-         WHERE tanggal_masuk <= DATE_SUB(CURDATE(), INTERVAL 5 YEAR)");
-
-      // (h) jumlah masuk tahun 2002
-      $show("h) Jumlah mahasiswa yang masuk tahun 2002",
-        "SELECT COUNT(*) AS jumlah
-         FROM mahasiswa
-         WHERE YEAR(tanggal_masuk)=2002");
-
-      // (i) NIM, Nama, Prodi urut berdasarkan Prodi
-      $show("i) NIM, Nama, Prodi diurutkan berdasarkan Prodi",
-        "SELECT nim, nama, prodi
-         FROM mahasiswa
-         ORDER BY prodi ASC, nama ASC");
-
-      // (j) urut tanggal masuk paling lama sampai terbaru
-      $show("j) Mahasiswa diurutkan dari tanggal masuk paling lama -> terbaru",
-        "SELECT * FROM mahasiswa ORDER BY tanggal_masuk ASC");
-
-      // (k) hitung jumlah mahasiswa jurusan Sipil
-      $show("k) Jumlah mahasiswa pada jurusan Sipil",
-        "SELECT COUNT(*) AS jumlah_sipil
-         FROM mahasiswa
-         WHERE prodi='Sipil'");
-
-      echo "<hr>";
-      echo "<p><b>Catatan:</b> Hapus data Soni (poin c) dilakukan dari menu <i>Data Mahasiswa</i> lewat tombol <i>Hapus</i>.</p>";
     }
 
     // default fallback
